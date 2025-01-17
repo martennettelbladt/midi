@@ -1,3 +1,7 @@
+# MicroBit MicroPython MIDI OUT TEST / Mårten Nettelbladt / 2021-09-11
+# Accelerometer X: Pitch
+# Accelerometer Y: Tempo + Velocity
+
 from microbit import *
 
 MIDI_NOTE_ON      = 0x90
@@ -43,8 +47,13 @@ def Start():
 Start()
 while True:
     #midiSetInstrument(0,1)
+
+    # Pitch
     i = (accelerometer.get_x() // 50) + 50
+
+    # Velocity + tempo
     j = (accelerometer.get_y() // 30) + 70
+    
     midiNoteOn(0, i, j)
     sleep(200 - j)
     midiNoteOff(0, i, 127)
